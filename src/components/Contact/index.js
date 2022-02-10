@@ -19,23 +19,26 @@ function ContactForm() {
     }
   };
 
-  function handleChange(e) {
-    if (e.target.name === "email") {
+  const handleChange = (e) => {
+    if (e.target.name === 'email') {
       const isValid = validateEmail(e.target.value);
-      // isValid conditional statement
       if (!isValid) {
-        setErrorMessage("Your email is invalid.");
+        setErrorMessage('Your email is invalid.');
       } else {
-        setErrorMessage("");
+        setErrorMessage('');
       }
     } else {
       if (!e.target.value.length) {
         setErrorMessage(`${e.target.name} is required.`);
       } else {
-        setErrorMessage("");
+        setErrorMessage('');
       }
     }
-  }
+    if (!errorMessage) {
+      setFormState({ ...formState, [e.target.name]: e.target.value });
+      console.log('Handle Form', formState);
+    }
+  };
 
   return (
     <section>
@@ -45,17 +48,17 @@ function ContactForm() {
           <label htmlFor="name">Name:</label>
           <input
             type="text"
+            name="name"
             defaultValue={name}
             onBlur={handleChange}
-            name="name"
           />
         </div>
         <div>
           <label htmlFor="email">Email address:</label>
           <input
             type="email"
-            defaultValue={email}
             name="email"
+            defaultValue={email}            
             onBlur={handleChange}
           />
         </div>
@@ -63,9 +66,9 @@ function ContactForm() {
           <label htmlFor="message">Message:</label>
           <textarea
             name="message"
-            defaultValue={message}
-            onBlur={handleChange}
             rows="5"
+            defaultValue={message}
+            onBlur={handleChange}            
           />
         </div>
         {errorMessage && (

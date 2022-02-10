@@ -21,7 +21,7 @@ function Nav(props) {
           <span role="img" aria-label="camera">
             {" "}
             📸
-          </span>{" "}
+          </span>
           Oh Snap!
         </a>
       </h2>
